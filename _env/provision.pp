@@ -6,6 +6,10 @@ exec { 'apt-get update':
     command => 'apt-get -qq -y update --fix-missing'
 }
 
+exec { 'locale':
+    command => 'locale-gen en_GB.UTF-8'
+}
+
 package { 'build-essential':
     ensure  => present,
     name    => 'build-essential',
@@ -18,14 +22,28 @@ package { 'ruby-dev':
     require => Package['build-essential']
 }
 
-package { 'ruby1.9.3':
+package { 'ruby':
     ensure  => present,
     name    => 'ruby1.9.3',
-    require => Package['ruby-dev']
+    require => [Exec['locale'], Package['ruby-dev']]
+}
+
+package { 'node':
+    ensure  => present,
+    name    => 'nodejs',
+    require => Exec['apt-get update']
 }
 
 exec { 'jekyll':
-    command => "gem install jekyll -v '=1.5.1' --no-rdoc --no-ri",
+    command => "gem install jekyll -v '=2.4.0' --no-rdoc --no-ri",
     unless  => 'gem list --local | grep jekyll',
-    require => Package['ruby1.9.3']
+    require => [Package['node'], Package['ruby']]
 }
+
+exec { 'jekyll serve':
+    command => "nohup jekyll serve --force_polling > /dev/null 2>&1 &",
+    cwd     => '/vagrant',
+    unless  => 'pgrep jekyll',
+    require => Exec['jekyll']
+}
+
