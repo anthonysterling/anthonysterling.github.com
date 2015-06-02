@@ -35,13 +35,13 @@ package { 'node':
 }
 
 exec { 'jekyll':
-    command => "gem install jekyll -v '=2.4.0' --no-rdoc --no-ri",
+    command => 'gem install jekyll -v "=2.4.0" --no-rdoc --no-ri',
     unless  => 'gem list --local | grep jekyll',
     require => [Package['node'], Package['ruby']]
 }
 
 exec { 'jekyll serve':
-    command => "nohup jekyll serve --force_polling > /dev/null 2>&1 &",
+    command => 'nohup jekyll serve --force_polling > /dev/null 2>&1 &',
     cwd     => '/vagrant',
     unless  => 'pgrep jekyll',
     require => Exec['jekyll']
