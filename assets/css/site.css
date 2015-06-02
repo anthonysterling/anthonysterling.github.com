@@ -12,3 +12,24 @@ a {
     border-bottom:1px dashed;
     color: inherit;
 }
+
+ul.pagination > li.disabled {
+    color: #ccc;
+    cursor: not-allowed;
+}
+
+h1 {
+    line-height: 1em;
+}
+
+div.highlight {
+    border: solid 1px #dfdfdf;
+    display: block;
+    padding: 0.5em;
+    background: #FAFAFA;
+    color: #333;
+}
+
+div.highlight > pre {
+    margin: .5em;
+}

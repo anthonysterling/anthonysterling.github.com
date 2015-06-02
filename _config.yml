@@ -1,2 +1,5 @@
-url: https://anthonysterling.com
-permalink: /posts/:title.html
+url: "https://anthonysterling.com"
+permalink: "/posts/:title.html"
+timezone: "Europe/London"
+paginate: 10
+paginate_path: "/posts/:num.html"
