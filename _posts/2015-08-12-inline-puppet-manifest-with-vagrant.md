@@ -8,7 +8,7 @@ I'm a huge fan of [Vagrant][1], it allows me to quicky test applications and pro
 
 Vagrant supports many [provisioners][2], but I tend to stick with [shell][3] and [Puppet][4]. Shell provides a nice quick way of hacking together something that Just Works™, but it's hard to get shell to be robust and idempotent which is why I prefer Puppet.
 
-Sadly Vagrant doesn't provide a way to provide an inline manifest like it does with [shell][4]. This means that for simple environments I have to create a folder for my manifest file or have it the root of the project.
+Sadly Vagrant doesn't provide a way to supply an inline [manifest][4] like it does with the [shell][4] provisioner. This means that for simple environments you have to create/specify a location for the manifest file or have it within the root of the project.
 
 If you're looking for a quick way to get a simple inline Puppet manifest in Vagrant, here's a simple (albeit [Fugly][5]) way to do this.
 
@@ -58,10 +58,11 @@ We create a variable in the Vagrantfile to hold the Puppet manifest, and then de
 
 We then use the built-in inline shell functionality of Vagrant to execute this shell command.
 
-It's not great, but it's a nice way to have a standalone Vagrantfile with Puppet functionality.
+It's not great, but it's a simple way to have a standalone Vagrantfile with Puppet functionality.
 
 [1]: https://www.vagrantup.com
 [2]: https://docs.vagrantup.com/v2/provisioning/index.html
 [3]: https://en.wikipedia.org/wiki/Unix_shell
 [4]: https://puppetlabs.com/puppet/what-is-puppet
-[5]: http://www.urbandictionary.com/define.php?term=Fugly
+[5]: https://docs.puppetlabs.com/pe/latest/puppet_modules_manifests.html#manifests
+[6]: http://www.urbandictionary.com/define.php?term=Fugly
