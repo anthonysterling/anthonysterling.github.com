@@ -8,9 +8,9 @@ I'm a huge fan of [Vagrant][1], it allows me to quicky test applications and pro
 
 Vagrant supports many [provisioners][2], but I tend to stick with [shell][3] and [Puppet][4]. Shell provides a nice quick way of hacking together something that Just Works™, but it's hard to get shell to be robust and idempotent which is why I prefer Puppet.
 
-Sadly Vagrant doesn't provide a way to supply an inline [manifest][4] like it does with the [shell][4] provisioner. This means that for simple environments you have to create/specify a location for the manifest file or have it within the root of the project.
+Sadly Vagrant doesn't provide a way to supply an inline [manifest][5] like it does with the [shell][4] provisioner. This means that for simple environments you have to create/specify a location for the manifest file or have it within the root of the project.
 
-If you're looking for a quick way to get a simple inline Puppet manifest in Vagrant, here's a simple (albeit [Fugly][5]) way to do this.
+If you're looking for a quick way to get a simple inline Puppet manifest in Vagrant, here's a simple (albeit [Fugly][6]) way to do this.
 
 {% highlight ruby %}
 
