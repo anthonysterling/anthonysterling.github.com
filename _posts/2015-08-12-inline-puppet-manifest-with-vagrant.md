@@ -14,36 +14,36 @@ If you're looking for a quick way to get a simple inline Puppet manifest in Vagr
 
 {% highlight ruby %}
 
-	$manifest = <<PUPPET
+$manifest = <<PUPPET
 
-		Exec {
-		    path => ['/usr/bin', '/bin', '/usr/sbin', '/sbin', '/usr/local/bin', '/usr/local/sbin']
-		}
+    Exec {
+        path => ['/usr/bin', '/bin', '/usr/sbin', '/sbin', '/usr/local/bin', '/usr/local/sbin']
+    }
 
-		exec { 'apt-get update':
-		    command => 'apt-get -qq -y update --fix-missing',
-		    unless  => 'grep -F `date +"%y-%m-%d"` /var/log/apt/history.log'
-		}
+    exec { 'apt-get update':
+        command => 'apt-get -qq -y update --fix-missing',
+        unless  => 'grep -F `date +"%y-%m-%d"` /var/log/apt/history.log'
+    }
 
-		package { 'build-essential':
-		    ensure  => present,
-		    name    => 'build-essential',
-		    require => Exec['apt-get update']
-		}
+    package { 'build-essential':
+        ensure  => present,
+        name    => 'build-essential',
+        require => Exec['apt-get update']
+    }
 
-	PUPPET
+PUPPET
 
-	def inline_puppet(manifest, file = "provision.pp")
-		require 'base64'
-		"echo '#{Base64.strict_encode64(manifest)}' | base64 --decode > /tmp/#{file} && puppet apply -v /tmp/#{file}"
-	end
+def inline_puppet(manifest, file = "provision.pp")
+    require 'base64'
+    "echo '#{Base64.strict_encode64(manifest)}' | base64 --decode > /tmp/#{file} && puppet apply -v /tmp/#{file}"
+end
 
-	Vagrant.configure("2") do |config|
-		config.vm.box = "trusty64"
-		config.vm.box_url = "http://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box"
-		config.vm.provision :shell, :inline => inline_puppet($manifest)
+Vagrant.configure("2") do |config|
+    config.vm.box = "trusty64"
+    config.vm.box_url = "http://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box"
+    config.vm.provision :shell, :inline => inline_puppet($manifest)
 
-	end
+end
 
 {% endhighlight %}
 
