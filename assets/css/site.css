@@ -25,6 +25,7 @@ h1 {
 
 div.highlight {
     border: solid 1px #dfdfdf;
+    font-size: .8em;
     display: block;
     padding: 0.5em;
     background: #FAFAFA;
