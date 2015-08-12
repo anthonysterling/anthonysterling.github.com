@@ -33,16 +33,15 @@ $manifest = <<PUPPET
 
 PUPPET
 
-def inline_puppet(manifest, file = "provision.pp")
-    require 'base64'
-    "echo '#{Base64.strict_encode64(manifest)}' | base64 --decode > /tmp/#{file} && puppet apply -v /tmp/#{file}"
+def inline_puppet(manifest)
+	require 'base64'
+	"TMPFILE=$(mktemp); echo '#{Base64.strict_encode64(manifest)}' | base64 --decode > $TMPFILE; puppet apply -v $TMPFILE"
 end
 
 Vagrant.configure("2") do |config|
     config.vm.box = "trusty64"
     config.vm.box_url = "http://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box"
     config.vm.provision :shell, :inline => inline_puppet($manifest)
-
 end
 
 {% endhighlight %}
@@ -53,7 +52,7 @@ We create a variable in the Vagrantfile to hold the Puppet manifest, and then de
 
 1. Base64 encodes the content of `$manifest` using the Base64 module in Ruby so we don't have to worry about escaping it for the shell
 2. Uses `base64` to decode the encoded manifest
-3. Writes the decoded content to a file to in the `/tmp` directory of the Vagrant box
+3. Writes the decoded content to a temporary file, using `mktemp`, within the Vagrant box
 4. Instructs Puppet to apply the manifest to the Vagrant box
 
 We then use the built-in inline shell functionality of Vagrant to execute this shell command.
