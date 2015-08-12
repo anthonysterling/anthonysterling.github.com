@@ -1,6 +1,7 @@
 body {
     font-family: 'Raleway', sans-serif;
     background-color: #fefefe;
+    padding-bottom: 3em;
     color: #222;
     line-height: 1.5em;
     font-size: 1.2em;
@@ -32,4 +33,7 @@ div.highlight {
 
 div.highlight > pre {
     margin: .5em;
+    white-space: pre;
+    overflow: scroll;
+    width:inherit;
 }
