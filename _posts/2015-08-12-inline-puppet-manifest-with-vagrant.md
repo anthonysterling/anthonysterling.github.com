@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Inline Puppet Manifest With Vagrant
+title: Inline Puppet Manifest with Vagrant
 date: 2015-08-12
 ---
 
