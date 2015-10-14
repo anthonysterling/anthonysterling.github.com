@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Use JQ to get the external IP of Kubernetes Nodes
+title: Use jq to get the external IP of Kubernetes Nodes
 date: 2015-10-14
 ---
 
@@ -10,7 +10,7 @@ Following a brief [Twitter conversation][1] with [Alexandre González][2], who i
     kubectl get nodes -o json|grep ExternalIP -A1|tail -n1|cut -d: -f2|tr "\"" " "|tr -d '[[:space:]]'
 {% endhighlight %}
 
-I figured [JQ][5] would be be suitable, to quote the author
+I figured [jq][5] should be be suitable, to quote the author of jq
 
 > jq is like sed for JSON data - you can use it to slice and filter and map and transform structured data with the same ease that sed, awk, grep and friends let you play with text.
 
