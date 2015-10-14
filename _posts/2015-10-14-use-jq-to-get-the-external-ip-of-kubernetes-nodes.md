@@ -4,7 +4,7 @@ title: Use jq to get the external IP of Kubernetes Nodes
 date: 2015-10-14
 ---
 
-Following a brief [Twitter conversation][1] with [Alexandre González][2], who is one of the organisers of the excellent [Golang UK Conference][3], who asked if there was a better way of finding the External IP of a [Kubernetes][4] Node instead of using
+Following a brief [Twitter conversation][1] with [Alexandre González][2], one of the organisers of the excellent [Golang UK Conference][3], who asked if there was a better way of finding the External IP of a [Kubernetes][4] Node instead of using
 
 {% highlight bash %}
     kubectl get nodes -o json|grep ExternalIP -A1|tail -n1|cut -d: -f2|tr "\"" " "|tr -d '[[:space:]]'
