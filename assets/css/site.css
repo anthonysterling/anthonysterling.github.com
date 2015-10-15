@@ -14,6 +14,11 @@ a {
     color: inherit;
 }
 
+blockquote {
+    border-left: solid 5px #dfdfdf;
+    padding-left: 15px;
+}
+
 div.row.back {
     margin-top: .8em;
 }
