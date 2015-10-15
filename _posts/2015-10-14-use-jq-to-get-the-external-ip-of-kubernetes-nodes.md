@@ -14,7 +14,7 @@ I figured [jq][5] should be be suitable, to quote the author of jq
 
 > jq is like sed for JSON data - you can use it to slice and filter and map and transform structured data with the same ease that sed, awk, grep and friends let you play with text.
 
-Here's how you can use JQ to obtain the External IP of one or many Kubernetes Node(s).
+Here's how you can use jq to obtain the External IP of one or many Kubernetes Node(s).
 
 {% highlight bash %}
     kubectl get nodes -o json | jq '.items[] | .status .addresses[] | select(.type=="ExternalIP") | .address' 

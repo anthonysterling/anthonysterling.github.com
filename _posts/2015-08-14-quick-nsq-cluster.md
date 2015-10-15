@@ -54,7 +54,6 @@ done
     -http-address="0.0.0.0:9000" \
     -lookupd-http-address="127.0.0.1:9011" \
     -lookupd-http-address="127.0.0.1:9012" >> "$NSQADMIN_LOG" 2>&1 &
-
 {% endhighlight %}
 
 I'm really looking forward to learning more about NSQ, its [features][4] look impressive and it's pretty simple to understand.
