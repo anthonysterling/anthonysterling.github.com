@@ -17,6 +17,7 @@ a {
 blockquote {
     border-left: solid 5px #dfdfdf;
     padding-left: 15px;
+    font-style: italic;
 }
 
 div.row.back {
