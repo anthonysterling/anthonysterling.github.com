@@ -7,6 +7,18 @@ layout: default
         {{ content }}
     </div>
 </div>
+{% if page.tags %}
+    <div class="row">
+        <div class="small-11 small-centered columns tags">
+            <span>This post was tagged with: </span>
+            <ul>
+                {% for tag in page.tags %}
+                    <li>{{ tag }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endif %}
 <div class="row back">
     <div class="small-11 small-centered columns">
         <a href="/posts/index.html">&larr; Back</a>

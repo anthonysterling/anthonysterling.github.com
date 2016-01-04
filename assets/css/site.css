@@ -10,7 +10,7 @@ body {
 
 a {
     text-decoration: none;
-    border-bottom:1px dashed;
+    border-bottom: 1px dashed;
     color: inherit;
 }
 
@@ -37,7 +37,7 @@ div.highlight {
     border: solid 1px #dfdfdf;
     font-size: .8em;
     display: block;
-    padding: 0.5em;
+    padding: .5em;
     background: #FAFAFA;
     color: #333;
 }
@@ -47,4 +47,23 @@ div.highlight > pre {
     white-space: pre;
     overflow: scroll;
     width:inherit;
+}
+
+div.tags {
+    margin-top: .8em;
+}
+
+div.tags ul {
+    padding: 0;
+    margin: 0;
+    display: inline;
+}
+
+div.tags ul li {
+    display: inline;
+    padding: .2em .4em;
+    background-color: #ddd;
+    font-style: italic;
+    font-size: .8em;
+    text-transform: lowercase;
 }

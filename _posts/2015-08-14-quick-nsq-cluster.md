@@ -2,6 +2,7 @@
 layout: post
 title: Quick NSQ Cluster
 date: 2015-08-14
+tags: [NSQ]
 ---
 
 I've been meaning to look at [Bitly][1]'s realtime distributed messaging platform [NSQ][2] for a while now. It's written in [Go][3] so it's easy to deploy, and comes with a built-in HTTP interface for statistics, administration, and producers.
