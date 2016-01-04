@@ -2,9 +2,10 @@
 layout: post
 title: Inline Puppet Manifest with Vagrant
 date: 2015-08-12
+tags: [Puppet, Vagrant]
 ---
 
-I'm a huge fan of [Vagrant][1], it allows me to quicky test applications and proposed architectures with minimal fuss and, with a provisioner, in a way that's reproducible for myself and others.
+I'm a huge fan of [Vagrant][1], it allows me to quickly test applications and proposed architectures with minimal fuss and, with a provisioner, in a way that's reproducible for myself and others.
 
 Vagrant supports many [provisioners][2], but I tend to stick with [shell][3] and [Puppet][4]. Shell provides a nice quick way of hacking together something that Just Works™, but it's hard to get shell to be robust and idempotent which is why I prefer Puppet.
 
@@ -13,7 +14,6 @@ Sadly Vagrant doesn't provide a way to supply an inline [manifest][5] like it do
 If you're looking for a quick way to get a simple inline Puppet manifest in Vagrant, here's a simple (albeit [Fugly][6]) way to do this.
 
 {% highlight ruby %}
-
 $manifest = <<PUPPET
 
     Exec {
@@ -42,7 +42,6 @@ Vagrant.configure("2") do |config|
     config.vm.box = "ubuntu/trusty64"
     config.vm.provision :shell, :inline => inline_puppet($manifest)
 end
-
 {% endhighlight %}
 
 Let me walk you though what happens.

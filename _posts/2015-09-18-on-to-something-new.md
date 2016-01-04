@@ -2,6 +2,7 @@
 layout: post
 title: On to something new
 date: 2015-09-18
+tags: [Moltin, Personal]
 ---
 
 A few months ago, after more than 4 years working with the [Drummond Central] team as their Technical Director, I decided that it was time to start looking for new challenges. It wasn't an easy decision to make, the Drummond Central team are fantastic and we've delivered some great projects together during my time there.

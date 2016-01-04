@@ -2,12 +2,13 @@
 layout: post
 title: Use jq to get the external IP of Kubernetes Nodes
 date: 2015-10-14
+tags: [jq, Kubernetes]
 ---
 
 Following a brief [Twitter conversation][1] with [Alexandre González][2], one of the organisers of the excellent [Golang UK Conference][3], who asked if there was a better way of finding the External IP of a [Kubernetes][4] Node instead of using
 
 {% highlight bash %}
-    kubectl get nodes -o json|grep ExternalIP -A1|tail -n1|cut -d: -f2|tr "\"" " "|tr -d '[[:space:]]'
+kubectl get nodes -o json|grep ExternalIP -A1|tail -n1|cut -d: -f2|tr "\"" " "|tr -d '[[:space:]]'
 {% endhighlight %}
 
 I figured [jq][5] should be be suitable, to quote the author of jq
@@ -17,15 +18,15 @@ I figured [jq][5] should be be suitable, to quote the author of jq
 Here's how you can use jq to obtain the External IP of one or many Kubernetes Node(s).
 
 {% highlight bash %}
-    kubectl get nodes -o json | jq '.items[] | .status .addresses[] | select(.type=="ExternalIP") | .address' 
+kubectl get nodes -o json | jq '.items[] | .status .addresses[] | select(.type=="ExternalIP") | .address'
 {% endhighlight %}
 
 Alex subsequently found a neater way of doing it using the [built-in template][6] functionality - which I much prefer.
 
 {% highlight bash %}
-    {%raw%}
-    kubectl get nodes -o template --template='{{range.items}}{{range.status.addresses}}{{if eq .type "ExternalIP"}}{{.address}}{{end}}{{end}} {{end}}' 
-    {% endraw %}
+{%raw%}
+kubectl get nodes -o template --template='{{range.items}}{{range.status.addresses}}{{if eq .type "ExternalIP"}}{{.address}}{{end}}{{end}} {{end}}'
+{% endraw %}
 {% endhighlight %}
 
 Neat.
