@@ -5,13 +5,7 @@ date: 2016-01-04
 tags: [Moltin, API]
 ---
 
-Intro...
-
-Product Modifiers and Variants are ...
-
-We'll be using a combination of [jq][1] and [cURL][2] in this post, jq is completely optional here as I'm just using it to prettify the JSON response returned from the API.
-
-I'm going to assume that you've successfully registered for a [free Moltin account][3], and [authenticated][4] with v1.* of the API using your Client ID and Client Secret to obtain a valid Access Token - its use here is indicated by `$ACCESS_TOKEN` and can be replaced by your own valid Access Token.
+Through the use of modifiers and variants, you can add additional fields to your products. These fields allow you to create variations of your existing products. For example, if you are selling T-shirts, you can add modifiers for the size and the colour. Once you add variations - these are the possible values for each modifier - you can sell each variant product individually.
 
 Here's a quick rundown of what we'll be covering:-
 
@@ -26,6 +20,10 @@ Here's a quick rundown of what we'll be covering:-
 - Adding a product to a cart
 - Adding a product variant to a cart
 - Viewing a cart
+
+We'll be using a combination of [jq][1] and [cURL][2] in this post, jq is completely optional here as I'm just using it to prettify the JSON response returned from the API.
+
+I'm going to assume that you've successfully registered for a [free Moltin account][3], and [authenticated][4] with v1.* of the API using your Client ID and Client Secret to obtain a valid Access Token - its use here is indicated by `$ACCESS_TOKEN` and can be replaced by your own valid Access Token.
 
 Before we get started, we'll perform a quick to check to ensure we're correctly authenticated against Moltin's API by attempting to retrieve our account information:-
 
