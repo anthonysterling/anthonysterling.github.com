@@ -140,7 +140,7 @@ Let's see what our cart now contains:-
 curl -sH "Authorization: Bearer $ACCESS_TOKEN" https://api.molt.in/v1/carts/my-demo-cart | jq
 {% endhighlight %}
 
-There you have it! We've created a product, defined a modifier for the product and it's variants, and added it to a cart ready for checkout - a whistle stop tour of Moltin's Product Modifiers and Variants.
+There you have it! We've created a product, defined a modifier for the product and it's variants, and added it to a cart ready for checkout - a whistle stop tour of **moltin**'s Product Modifiers and Variants.
 
 [1]: https://stedolan.github.io/jq/
 [2]: http://curl.haxx.se/
