@@ -9,7 +9,7 @@ I've been meaning to look at [Bitly][1]'s realtime distributed messaging platfor
 
 I thought I'd quickly share this Bash script to start a little NSQ cluster with 2 `nsqlookupd` hosts, 5 `nsqd` nodes, and an instance of `nsqadmin` running on port 9000.
 
-{% highlight bash %}
+{% highlight bash linenos %}
 #!/usr/bin/env bash
 NSQ_VERSION=0.3.5
 NSQ_PACKAGE="nsq-$NSQ_VERSION.linux-amd64.go1.4.2"

@@ -13,7 +13,7 @@ Sadly Vagrant doesn't provide a way to supply an inline [manifest][5] like it do
 
 If you're looking for a quick way to get a simple inline Puppet manifest in Vagrant, here's a simple (albeit [Fugly][6]) way to do this.
 
-{% highlight ruby %}
+{% highlight ruby linenos %}
 $manifest = <<PUPPET
 
     Exec {
