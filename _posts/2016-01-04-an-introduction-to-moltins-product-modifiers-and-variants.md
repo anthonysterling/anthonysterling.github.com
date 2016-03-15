@@ -27,7 +27,7 @@ I'm going to assume that you've successfully registered for a [free **moltin** a
 
 Before we get started, we'll perform a quick to check to ensure we're correctly authenticated against Moltin's API by attempting to retrieve our account information:-
 
-{% highlight bash %}
+{% highlight bash linenos %}
 curl -sH "Authorization: Bearer $ACCESS_TOKEN" https://api.molt.in/v1/account | jq
 {% endhighlight %}
 
@@ -37,13 +37,13 @@ We'll start by creating a product to assign modifiers and variants to, but befor
 
 Let's see what categories we have in our store:-
 
-{% highlight bash %}
+{% highlight bash linenos %}
 curl -sH "Authorization: Bearer $ACCESS_TOKEN" https://api.molt.in/v1/categories | jq
 {% endhighlight %}
 
 As you can see, Moltin has already created a default category for us when we registered. You're free to create your own categories too, so if you'd like to do so head on over to [the documentation][6] to see how that's done. We're going to need some tax band information too, so let's see what's available:-
 
-{% highlight bash %}
+{% highlight bash linenos %}
 curl -sH "Authorization: Bearer $ACCESS_TOKEN" https://api.molt.in/v1/taxes | jq
 {% endhighlight %}
 
@@ -51,7 +51,7 @@ It seems Moltin have created a default tax band for us too, we now we have the I
 
 Let's add a Standard T-Shirt to our store:-
 
-{% highlight bash %}
+{% highlight bash linenos %}
 curl -sH "Authorization: Bearer $ACCESS_TOKEN" \
     --data-urlencode "sku=SKU001" \
     --data-urlencode "title=Standard T-Shirt" \
@@ -70,13 +70,13 @@ curl -sH "Authorization: Bearer $ACCESS_TOKEN" \
 
 Our Standard T-Shirt is going to cost 1.99, carry the SKU001 SKU, and belong to the default category and default tax band. Now that we've created our very first product, let's make sure it's ready to use:-
 
-{% highlight bash %}
+{% highlight bash linenos %}
 curl -sH "Authorization: Bearer $ACCESS_TOKEN" https://api.molt.in/v1/products | jq
 {% endhighlight %}
 
 Our Standard T-Shirt is going to come in three different sizes "Small", "Medium", and "Large". When we sell our Standard T-Shirt we'd like to charge an additional 0.50 for "Medium" and an additional 1.00 for "Large". So to do that, we're going to create a variant modifier to hold these options for us:-
 
-{% highlight bash %}
+{% highlight bash linenos %}
 curl -sH "Authorization: Bearer $ACCESS_TOKEN" \
     --data-urlencode "title=Size" \
     --data-urlencode "type=variant" \
@@ -86,7 +86,7 @@ curl -sH "Authorization: Bearer $ACCESS_TOKEN" \
 
 With the modifier created, we can use the returned modifier ID to add our "Small", "Medium", and "Large" variant options:-
 
-{% highlight bash %}
+{% highlight bash linenos %}
 curl -sH "Authorization: Bearer $ACCESS_TOKEN" \
     --data-urlencode "title=Small" \
     https://api.molt.in/v1/products/1154603472042066112/modifiers/1154604576049987777/variations | jq
@@ -106,7 +106,7 @@ We've only used the `mod_price` parameter for the "Medium" and "Large" options a
 
 When we view our product we should see the newly created modifiers and variants:-
 
-{% highlight bash %}
+{% highlight bash linenos %}
 curl -sH "Authorization: Bearer $ACCESS_TOKEN" https://api.molt.in/v1/products/1154603472042066112 | jq
 {% endhighlight %}
 
@@ -114,7 +114,7 @@ Success!
 
 We'll now move on to adding a product variant to a cart (or basket). A cart is created automatically for you when adding a product to one, the id of which is user defined, so you do not need to create a cart resource to add a product to. In this instance I've defined the name of my cart as `my-demo-cart`. It's worth noting that you've created a product with variations you cannot add the parent product to a cart, with that in mind let's add a "Medium" Standard T-Shirt to a cart:-
 
-{% highlight bash %}
+{% highlight bash linenos %}
 curl -sH "Authorization: Bearer $ACCESS_TOKEN" \
     --data-urlencode "id=1154603472042066112" \
     --data-urlencode "modifier[1154604576049987777]=1154605147146420420" \
@@ -126,7 +126,7 @@ We pass a `modifier` parameter along with the product ID and quantity to indicat
 
 Now let's add a "Large" one too, just in case we've put on a little Christmas Weight™ over the holidays:-
 
-{% highlight bash %}
+{% highlight bash linenos %}
 curl -sH "Authorization: Bearer $ACCESS_TOKEN" \
     --data-urlencode "id=1154603472042066112" \
     --data-urlencode "modifier[1154604576049987777]=1154605210790789318" \
@@ -136,7 +136,7 @@ curl -sH "Authorization: Bearer $ACCESS_TOKEN" \
 
 Let's see what our cart now contains:-
 
-{% highlight bash %}
+{% highlight bash linenos %}
 curl -sH "Authorization: Bearer $ACCESS_TOKEN" https://api.molt.in/v1/carts/my-demo-cart | jq
 {% endhighlight %}
 

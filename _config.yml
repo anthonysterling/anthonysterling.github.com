@@ -2,6 +2,8 @@ url: "https://anthonysterling.com"
 permalink: "/posts/:title.html"
 timezone: "Europe/London"
 encoding: "utf-8"
-paginate: 25
+paginate: 10
 paginate_path: "/posts/:num"
 exclude: ["Vagrantfile", "CNAME"]
+gems: ["jekyll-paginate"]
+highlighter: rouge
