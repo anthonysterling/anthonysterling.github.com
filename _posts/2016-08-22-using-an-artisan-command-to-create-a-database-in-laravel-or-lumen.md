@@ -91,7 +91,7 @@ Once we've deployed our services we can now just run the following commands to c
 
 {% highlight bash linenos %}
 php /var/www/artisan db:create
-php /var/www/artisan db:migrate
+php /var/www/artisan migrate
 {% endhighlight %}
 
 I hope this helps.
