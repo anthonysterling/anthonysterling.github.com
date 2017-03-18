@@ -5,11 +5,13 @@ date: 2017-03-18
 tags: [Minio, Digital Ocean, Storage]
 ---
 
-If you've not heard of [Minio][1] before, Minio is an object storage server that has a Amazon S3 compatible interface. I've previously deployed the standalone version to production, but I've never used the [Distribted Minio][2] functionality [released in November 2016][3]. When Minio in distributed mode, it lets you pool multiple drives across multiple nodes into a single object storage server. As drives are distributed across several nodes, distributed Minio can withstand multiple node failures and yet ensure full data protection.
+If you've not heard of [Minio][1] before, Minio is an object storage server that has a Amazon S3 compatible interface. I've previously deployed the standalone version to production, but I've never used the [Distribted Minio][2] functionality [released in November 2016][3].
+
+When Minio is in distributed mode, it lets you pool multiple drives across multiple nodes into a single object storage server. As drives are distributed across several nodes, distributed Minio can withstand multiple node failures and yet ensure full data protection.
 
 With the recent release of [Digital Ocean][4]'s [Block Storage][5] and [Load Balancer][6] functionality, I thought I'd spend a few hours attempting to set up a Distribted Minio cluster backed by Digital Ocean Block Storage behind a Load Balancer.
 
-The plan is to provision 4 Droplets, each running an instance of Minio, and attach a unique Block Storage Volume to each Droplet which is to used as persistent storage by Minio. We'll then create a Load Balancer to Round Robin HTTP traffic across the Droplets.
+The plan was to provision 4 Droplets, each running an instance of Minio, and attach a unique Block Storage Volume to each Droplet which was to used as persistent storage by Minio. Then create a Load Balancer to Round Robin the HTTP traffic across the Droplets.
 
 I initially started to manually create the Droplets through Digitial Ocean's Web UI, but then remembered that they have a CLI tool which I may be able to use. After a quick Google I found [doctl][7] which is a command line interface for the DigitalOcean API, it's installable via [Brew][8] too which is super handy.
 
@@ -119,13 +121,15 @@ case "$1" in
 esac
 {% endhighlight %}
 
-The script creates 4 Droplets (the minimum number of nodes required by Minio) and performs the following actions to each Droplet:-
+The script creates 4 512mb Ubuntu 16.04.2 x64 Droplets (the minimum number of nodes required by Minio) in the `Frankfurt 1` region and performs the following actions on each Droplet:-
 
 - Assigns my previously registered SSH key
 - Applies a tag named `minio-cluster`
 - Creates, and mounts, a unique 100GiB Volume
 
-Once the Droplets are provisioned it then uses the `minio-cluster` tag and creates a Load Balancer that forwards HTTP traffic on port 80 to port 9000 on any Droplet with the `minio-cluster` tag. Sadly I couldn't figure out a way to configure the Heath Checks on the Load Balancer via `doctl` so I did this via the Web UI. By default the Health Check is configured to perform a HTTP request to port 80 using a path of `/`, I changed this to use port 9000 and set the path to `/minio/login`.
+Once the Droplets are provisioned it then uses the `minio-cluster` tag and creates a Load Balancer that forwards HTTP traffic on port 80 to port 9000 on any Droplet with the `minio-cluster` tag.
+
+Sadly I couldn't figure out a way to configure the Heath Checks on the Load Balancer via `doctl` so I did this via the Web UI. By default the Health Check is configured to perform a HTTP request to port 80 using a path of `/`, I changed this to use port 9000 and set the path to `/minio/login`.
 
 Once the 4 nodes were provisioned I SSH'd into each and ran the following commands to install Minio and mount the assigned Volume:-
 
