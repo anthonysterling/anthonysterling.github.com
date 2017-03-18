@@ -143,7 +143,7 @@ echo '/dev/disk/by-id/scsi-0DO_Volume_minio-cluster-volume-node-1 /mnt/minio ext
 mount -a
 {% endhighlight %}
 
-The disk name was different on each node, `scsi-0DO_Volume_minio-cluster-volume-node-1`, `scsi-0DO_Volume_minio-cluster-volume-node-2`, ,`scsi-0DO_Volume_minio-cluster-volume-node-3`, and `scsi-0DO_Volume_minio-cluster-volume-node-4` for example but the Volume mount point `/mnt/minio` was the same on all the nodes.
+The disk name was different on each node, `scsi-0DO_Volume_minio-cluster-volume-node-1`, `scsi-0DO_Volume_minio-cluster-volume-node-2`, `scsi-0DO_Volume_minio-cluster-volume-node-3`, and `scsi-0DO_Volume_minio-cluster-volume-node-4` for example but the Volume mount point `/mnt/minio` was the same on all the nodes.
 
 Next up was running the Minio server on each node, on each node I ran the following command:-
 
