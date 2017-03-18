@@ -78,3 +78,7 @@ div.tags ul li {
     font-size: .8em;
     text-transform: lowercase;
 }
+
+p code {
+    background-color: #eee;
+}
