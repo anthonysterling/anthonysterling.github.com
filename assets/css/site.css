@@ -79,6 +79,6 @@ div.tags ul li {
     text-transform: lowercase;
 }
 
-p code {
+code.highlighter-rouge {
     background-color: #eee;
 }
