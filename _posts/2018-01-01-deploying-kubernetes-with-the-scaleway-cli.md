@@ -13,17 +13,13 @@ Once `scw` was installed I authenticated with Scaleway by running `scw login` an
 
 I've posted the script I ended up with below, but I'll give you a quick run through of it.
 
-To create the servers I ran the `scw create --bootscript="8fd15f37" --name="<name>" --commercial-type="VC1S" Ubuntu_Xenial` command. You'll notice the `--bootscript` option which allowed me to specify which bootscript to use when provisioning the instance, I obtained the correct bootscript identifier by running `scw images -f type=bootscript` and finding the `x86_64 4.10.8` script.
+To create the servers I ran the `scw create --bootscript="8fd15f37" --name="<name>" --commercial-type="VC1S" Ubuntu_Xenial` command. You'll notice the `--bootscript` option which allowed me to specify which bootscript to use when provisioning the instance, I obtained the correct bootscript identifier by running `scw images -f type=bootscript` and finding the `x86_64 4.10.8` script - if you had read the previously mentioned post you would've have seen why this was important.
 
-If you had read the previously mentioned post you would've have seen why this was important.
+It would've been nice if I could use the `tag` functionality provided by the control panel UI to address/filter instances, but this doesn't appear to be supported in an intuitive way with the CLI so I used the `--name` option as a surrogate.
 
-It would've been nice if I could use the `tag` functionality provided by the control panel UI to address instances, but this doesn't appear to be supported in an intuitive way with the CLI - so I used the `--name` option as a surrogate.
+Once the servers were created they needed to be started, to do this I ran `scw start --wait <identifier>` against each of the servers.
 
-Once the servers were created I then needed to be started, to do this I ran `scw start --wait <identifier>` against each of the servers.
-
-To prepare the servers I used the `scw exec <identifier> <command>` command to update and install the required packages
-
-Once those were prepared I configured the Kubernetes master using `kubeadm`, and obtained a join token to use on the nodes - the `token create --print-join-command` functionality was introduced in 1.9 and it very handy.
+To prepare the servers I used the `scw exec <identifier> <command>` command to update and install the required packages. Once those were prepared I configured the Kubernetes master using `kubeadm`, and obtained a join token to use on the nodes - the `token create --print-join-command` functionality was introduced in 1.9 and it's very handy.
 
 Strangely, when I tried to use the output of `scw exec -w "$master" 'kubeadm token create --print-join-command'` directly I get an error from `kubeadm` on the node stating `couldn't validate the identity of the API Server: encoding/hex: odd length hex string`. After piping the content into `xxd`, I noticed that the string ended in an `\r\n` pair so I removed this with `tr`.
 
