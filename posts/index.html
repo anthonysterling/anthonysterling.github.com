@@ -20,33 +20,6 @@ title: Posts
         {% endif %}
     </div>
 </div>
-{% if paginator.total_pages > 1 %}
-    <div class="row">
-        <div class="small-11 small-centered columns">
-            <ul class="inline-list pagination">
-                {% if paginator.previous_page %}
-                    <li class="previous">
-                        <a href="{{ paginator.previous_page_path }}">Previous</a>
-                    </li>
-                {% else %}
-                    <li class="previous disabled">
-                        <span class="previous">Previous</span>
-                    </li>
-                {% endif %}
-                
-                {% if paginator.next_page %}
-                    <li class="next">
-                        <a href="{{ paginator.next_page_path }}">Next</a>
-                    </li>
-                {% else %}
-                    <li class="next disabled">
-                        <span>Next</span>
-                    </li>
-                {% endif %}
-            </ul>
-        </div>
-    </div>
-{% endif %}
 <div class="row back">
     <div class="small-11 small-centered columns">
         <a href="/">&larr; Back</a>
