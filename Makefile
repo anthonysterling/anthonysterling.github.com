@@ -1,6 +1,6 @@
 THIS := $(realpath $(lastword $(MAKEFILE_LIST)))
 HERE := $(shell dirname $(THIS))
-IMAGE := "jekyll/builder:pages"
+IMAGE := "jekyll/jekyll:pages"
 MOUNT := "$(HERE):/srv/jekyll"
 
 .PHONY: build up down
